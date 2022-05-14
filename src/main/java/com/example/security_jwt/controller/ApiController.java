@@ -1,4 +1,4 @@
-package com.example.security_jwt;
+package com.example.security_jwt.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,5 +10,11 @@ public class ApiController {
     @GetMapping("/hello")
     public String hello() {
         return "hello";
+
+    }
+
+    @GetMapping("welcome")
+    public String welcome() {
+        return "welcome";
     }
 }
