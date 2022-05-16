@@ -14,7 +14,7 @@ import java.net.http.HttpRequest;
 @Slf4j
 public class JwtFilter extends GenericFilter {
 
-    private final String AUTHORIZATION_HEADER = "Authorization";
+    public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private TokenProvider tokenProvider;
 

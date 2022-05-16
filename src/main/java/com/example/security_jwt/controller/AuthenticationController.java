@@ -1,8 +1,12 @@
 package com.example.security_jwt.controller;
 
 import com.example.security_jwt.dto.LoginDto;
+import com.example.security_jwt.dto.TokenDto;
+import com.example.security_jwt.filter.JwtFilter;
 import com.example.security_jwt.jwt.TokenProvider;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -28,6 +32,9 @@ public class AuthenticationController {
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwtToken = tokenProvider.createToken(authentication);
 
-        return ResponseEntity.ok(jwtToken);
+        HttpHeaders httpHeaders = new HttpHeaders();
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwtToken);
+
+        return new ResponseEntity<>(new TokenDto(jwtToken), httpHeaders, HttpStatus.OK);
     }
 }
